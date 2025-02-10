@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../app_styles.dart';
 
 // Este widget representa la pantalla principal para mostrar los niveles.
@@ -29,37 +29,57 @@ class _NivelScreenState extends State<NivelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0), // Color de fondo negro.
+      backgroundColor:
+          const Color.fromARGB(255, 0, 0, 0), // Color de fondo negro.
       appBar: AppBar(
-        backgroundColor: Colors.black, // Color de fondo de la barra de app negro.
+        backgroundColor:
+            Colors.black, // Color de fondo de la barra de app negro.
         elevation: 0, // Elimina la sombra debajo de la barra de app.
-        leading: const Icon(Icons.person, color: Colors.green), // Icono de persona a la izquierda.
+        leading: const Icon(Icons.person,
+            color: Colors.green), // Icono de persona a la izquierda.
         title: const Row(
           children: [
-            Text('user', style: AppStyles.userTextStyle), // Texto 'user' con estilo definido en AppStyles.
+            Text('user',
+                style: AppStyles
+                    .userTextStyle), // Texto 'user' con estilo definido en AppStyles.
             Spacer(), // Espacio para empujar el icono de menú a la derecha.
-            Icon(Icons.menu, color: Colors.green), // Icono de menú a la derecha.
+            Icon(Icons.menu,
+                color: Colors.green), // Icono de menú a la derecha.
           ],
         ),
       ),
-      body: const SingleChildScrollView( // Permite hacer scroll si el contenido es más largo que la pantalla.
+      body: const SingleChildScrollView(
+        // Permite hacer scroll si el contenido es más largo que la pantalla.
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30), // Espacio alrededor del contenido.
+          padding: EdgeInsets.symmetric(
+              horizontal: 20, vertical: 30), // Espacio alrededor del contenido.
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center, // Alinea los elementos al centro horizontalmente.
+            crossAxisAlignment: CrossAxisAlignment
+                .center, // Alinea los elementos al centro horizontalmente.
             children: [
-              Text('Nivel', style: AppStyles.nivelTextStyle), // Texto 'Nivel' con estilo definido.
+              Text('Nivel',
+                  style: AppStyles
+                      .nivelTextStyle), // Texto 'Nivel' con estilo definido.
               SizedBox(height: 50), // Espacio vertical.
-              NivelCard(nivel: 'Principiante', experiencia: 'Menos de 6 meses\nde experiencia'), // Tarjeta de nivel Principiante.
+              NivelCard(
+                  nivel: 'Principiante',
+                  experiencia:
+                      'Menos de 6 meses\nde experiencia'), // Tarjeta de nivel Principiante.
               SizedBox(height: 50), // Espacio vertical.
-              NivelCard(nivel: 'Intermedio', experiencia: 'Más de 6 meses y\nmenos de 2 años'), // Tarjeta de nivel Intermedio.
+              NivelCard(
+                  nivel: 'Intermedio',
+                  experiencia:
+                      'Más de 6 meses y\nmenos de 2 años'), // Tarjeta de nivel Intermedio.
               SizedBox(height: 50), // Espacio vertical.
-              NivelCard(nivel: 'Avanzado', experiencia: 'Más de 2 años'), // Tarjeta de nivel Avanzado.
+              NivelCard(
+                  nivel: 'Avanzado',
+                  experiencia: 'Más de 2 años'), // Tarjeta de nivel Avanzado.
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar( // Barra de navegación inferior.
+      bottomNavigationBar: BottomNavigationBar(
+        // Barra de navegación inferior.
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
@@ -75,9 +95,12 @@ class _NivelScreenState extends State<NivelScreen> {
           ),
         ],
         currentIndex: _selectedIndex, // Índice del elemento seleccionado.
-        selectedItemColor: Colors.white, // Color de los iconos/textos seleccionados.
-        unselectedItemColor: Colors.white70, // Color de los iconos/textos no seleccionados.
-        backgroundColor: Colors.green, // Color de fondo de la barra de navegación.
+        selectedItemColor:
+            Colors.white, // Color de los iconos/textos seleccionados.
+        unselectedItemColor:
+            Colors.white70, // Color de los iconos/textos no seleccionados.
+        backgroundColor:
+            Colors.green, // Color de fondo de la barra de navegación.
         onTap: _onItemTapped, // Función que se llama al tocar un elemento.
         type: BottomNavigationBarType.fixed, // Muestra todos los labels.
         iconSize: 28, // Tamaño de los iconos.
@@ -91,7 +114,8 @@ class NivelCard extends StatelessWidget {
   final String nivel; // Nivel (Principiante, Intermedio, Avanzado).
   final String experiencia; // Descripción de la experiencia.
 
-  const NivelCard({super.key, 
+  const NivelCard({
+    super.key,
     required this.nivel,
     required this.experiencia,
   });
@@ -104,17 +128,20 @@ class NivelCard extends StatelessWidget {
         Expanded(
           flex: 2, // Ocupa 2/5 del espacio.
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10), // Espacio interno.
+            padding: const EdgeInsets.symmetric(
+                vertical: 15, horizontal: 10), // Espacio interno.
             decoration: const BoxDecoration(
               color: Colors.black87, // Color de fondo negro semi-transparente.
-              borderRadius: BorderRadius.only( // Bordes redondeados solo a la izquierda.
+              borderRadius: BorderRadius.only(
+                // Bordes redondeados solo a la izquierda.
                 topLeft: Radius.circular(30),
                 bottomLeft: Radius.circular(30),
               ),
             ),
             child: Text(
               nivel, // Texto del nivel.
-              style: AppStyles.nivelCardTitleTextStyle, // Estilo del texto del nivel.
+              style: AppStyles
+                  .nivelCardTitleTextStyle, // Estilo del texto del nivel.
               textAlign: TextAlign.center, // Alineación del texto al centro.
             ),
           ),
@@ -123,20 +150,24 @@ class NivelCard extends StatelessWidget {
         Expanded(
           flex: 3, // Ocupa 3/5 del espacio.
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10), // Espacio interno.
+            padding: const EdgeInsets.symmetric(
+                vertical: 15, horizontal: 10), // Espacio interno.
             decoration: const BoxDecoration(
               color: Colors.green, // Color de fondo verde.
-              borderRadius: BorderRadius.only( // Bordes redondeados solo a la derecha.
+              borderRadius: BorderRadius.only(
+                // Bordes redondeados solo a la derecha.
                 topRight: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center, // Alineación de los elementos al centro.
+              crossAxisAlignment: CrossAxisAlignment
+                  .center, // Alineación de los elementos al centro.
               children: [
                 Text(
                   'experiencia', // Texto "experiencia".
-                  style: AppStyles.nivelCardSubtitleTextStyle.copyWith( // Estilo del texto de "experiencia".
+                  style: AppStyles.nivelCardSubtitleTextStyle.copyWith(
+                    // Estilo del texto de "experiencia".
                     fontWeight: FontWeight.bold, // Texto en negrita.
                     color: Colors.white, // Color del texto blanco.
                   ),
@@ -144,10 +175,12 @@ class NivelCard extends StatelessWidget {
                 const SizedBox(height: 5), // Espacio vertical.
                 Text(
                   experiencia, // Texto de la experiencia.
-                  style: AppStyles.nivelCardSubtitleTextStyle.copyWith( // Estilo del texto de la experiencia.
+                  style: AppStyles.nivelCardSubtitleTextStyle.copyWith(
+                    // Estilo del texto de la experiencia.
                     color: Colors.white, // Color del texto blanco.
                   ),
-                  textAlign: TextAlign.center, // Alineación del texto al centro.
+                  textAlign:
+                      TextAlign.center, // Alineación del texto al centro.
                 ),
               ],
             ),

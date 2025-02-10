@@ -12,23 +12,29 @@ class Temporizador extends StatefulWidget {
 }
 
 class _TemporizadorState extends State<Temporizador> {
-  bool isPlaying = false; // Variable para controlar si el temporizador está en marcha.
-  Duration tiempoTranscurrido = Duration.zero; // Variable para almacenar el tiempo transcurrido.
+  bool isPlaying =
+      false; // Variable para controlar si el temporizador está en marcha.
+  Duration tiempoTranscurrido =
+      Duration.zero; // Variable para almacenar el tiempo transcurrido.
   Timer? _timer; // Variable para el temporizador.
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black, // Color de fondo negro.
-      body: SafeArea( // SafeArea para evitar que el contenido se superponga a la barra de estado.
-        child: Column( // Columna principal que contiene todos los elementos.
-          crossAxisAlignment: CrossAxisAlignment.stretch, // Los elementos se estiran horizontalmente.
+      body: SafeArea(
+        // SafeArea para evitar que el contenido se superponga a la barra de estado.
+        child: Column(
+          // Columna principal que contiene todos los elementos.
+          crossAxisAlignment: CrossAxisAlignment
+              .stretch, // Los elementos se estiran horizontalmente.
           children: [
             // Barra de título verde con imagen
             Container(
               color: Colors.green, // Color de fondo verde.
               padding: const EdgeInsets.all(16.0), // Padding interno.
-              child: const Row( // Fila para la imagen y el título.
+              child: const Row(
+                // Fila para la imagen y el título.
                 children: [
                   // Image.asset(
                   //   'assets/plancha_ejercicio.png', // Reemplaza con la ruta de tu imagen
@@ -52,16 +58,21 @@ class _TemporizadorState extends State<Temporizador> {
 
             // Contenedor "En ejecución"
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16.0), // Margen horizontal.
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 16.0), // Margen horizontal.
               padding: const EdgeInsets.all(8.0), // Padding interno.
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.5), // Color de fondo verde semi-transparente.
-                borderRadius: BorderRadius.circular(10.0), // Bordes redondeados.
+                color: Colors.green.withOpacity(
+                    0.5), // Color de fondo verde semi-transparente.
+                borderRadius:
+                    BorderRadius.circular(10.0), // Bordes redondeados.
               ),
-              child: const Center( // Texto centrado.
+              child: const Center(
+                // Texto centrado.
                 child: Text(
                   'En ejecución', // Texto "En ejecución".
-                  style: TextStyle(color: Colors.white), // Color de texto blanco.
+                  style:
+                      TextStyle(color: Colors.white), // Color de texto blanco.
                 ),
               ),
             ),
@@ -70,15 +81,19 @@ class _TemporizadorState extends State<Temporizador> {
 
             // Contenedor del cronómetro
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16.0), // Margen horizontal.
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 16.0), // Margen horizontal.
               padding: const EdgeInsets.all(16.0), // Padding interno.
               decoration: BoxDecoration(
                 color: Colors.grey[900], // Color de fondo gris oscuro.
-                borderRadius: BorderRadius.circular(10.0), // Bordes redondeados.
+                borderRadius:
+                    BorderRadius.circular(10.0), // Bordes redondeados.
               ),
-              child: Center( // Texto centrado.
+              child: Center(
+                // Texto centrado.
                 child: Text(
-                  _formatDuration(tiempoTranscurrido), // Formatea el tiempo transcurrido.
+                  _formatDuration(
+                      tiempoTranscurrido), // Formatea el tiempo transcurrido.
                   style: const TextStyle(
                     color: Colors.white, // Color de texto blanco.
                     fontSize: 40, // Tamaño de fuente 40.
@@ -92,15 +107,20 @@ class _TemporizadorState extends State<Temporizador> {
 
             // Barra de control de reproducción
             Container(
-              color: const Color.fromARGB(255, 159, 17, 17), // Color de fondo rojo.
+              color: const Color.fromARGB(
+                  255, 159, 17, 17), // Color de fondo rojo.
               padding: const EdgeInsets.all(8.0), // Padding interno.
-              child: Row( // Fila para los botones de control.
-                mainAxisAlignment: MainAxisAlignment.spaceAround, // Espacio entre los botones.
+              child: Row(
+                // Fila para los botones de control.
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround, // Espacio entre los botones.
                 children: [
-                  IconButton( // Botón de pausa/play.
+                  IconButton(
+                    // Botón de pausa/play.
                     onPressed: () {
                       setState(() {
-                        isPlaying = !isPlaying; // Invierte el estado de reproducción.
+                        isPlaying =
+                            !isPlaying; // Invierte el estado de reproducción.
                         if (isPlaying) {
                           _iniciarCronometro(); // Inicia el cronómetro.
                         } else {
@@ -109,20 +129,25 @@ class _TemporizadorState extends State<Temporizador> {
                       });
                     },
                     icon: Icon(
-                      isPlaying ? Icons.pause : Icons.play_arrow, // Icono de pausa o play.
+                      isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow, // Icono de pausa o play.
                       color: Colors.white, // Color de icono blanco.
                       size: 30, // Tamaño de icono 30.
                     ),
                   ),
-                  IconButton( // Botón de stop.
+                  IconButton(
+                    // Botón de stop.
                     onPressed: () {
                       setState(() {
                         isPlaying = false; // Detiene la reproducción.
-                        tiempoTranscurrido = Duration.zero; // Reinicia el tiempo transcurrido.
+                        tiempoTranscurrido =
+                            Duration.zero; // Reinicia el tiempo transcurrido.
                         _detenerCronometro(); // Detiene el cronómetro.
                       });
                     },
-                    icon: const Icon(Icons.stop, color: Colors.white, size: 30), // Icono de stop.
+                    icon: const Icon(Icons.stop,
+                        color: Colors.white, size: 30), // Icono de stop.
                   ),
                 ],
               ),
@@ -135,17 +160,22 @@ class _TemporizadorState extends State<Temporizador> {
 
   // Función para formatear la duración a HH:MM:SS.
   String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0'); // Añade un 0 delante si es necesario.
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60)); // Minutos.
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60)); // Segundos.
+    String twoDigits(int n) =>
+        n.toString().padLeft(2, '0'); // Añade un 0 delante si es necesario.
+    String twoDigitMinutes =
+        twoDigits(duration.inMinutes.remainder(60)); // Minutos.
+    String twoDigitSeconds =
+        twoDigits(duration.inSeconds.remainder(60)); // Segundos.
     return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds"; // Formato HH:MM:SS.
   }
 
   // Función para iniciar el cronómetro.
   void _iniciarCronometro() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) { // Se ejecuta cada segundo.
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // Se ejecuta cada segundo.
       setState(() {
-        tiempoTranscurrido = tiempoTranscurrido + const Duration(seconds: 1); // Incrementa el tiempo transcurrido.
+        tiempoTranscurrido = tiempoTranscurrido +
+            const Duration(seconds: 1); // Incrementa el tiempo transcurrido.
       });
     });
   }

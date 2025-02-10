@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:flutter/material.dart';
 
-
 // ignore: unused_import
 import 'package:appgym/screens/copa.dart';
 // ignore: unused_import
@@ -17,7 +16,6 @@ import 'package:appgym/screens/numero_re_ser.dart';
 // ignore: unused_import
 import 'package:appgym/screens/temporizador.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -30,7 +28,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-
       //home: NivelScreen(),
       //home: Temporizador(),
       //home: EjecucionesScreen(),
@@ -38,9 +35,6 @@ class MyApp extends StatelessWidget {
       //home: numero_repe(),
       //home: FelicitacionesScreen(),
       //home: DesafiosScreen(),
-      
-      
     );
   }
 }
-
