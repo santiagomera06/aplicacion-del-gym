@@ -1,159 +1,138 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
-// Define un widget con estado (StatefulWidget) llamado numero_repe
-// ignore: camel_case_types, use_key_in_widget_constructors
-class numero_repe extends StatefulWidget {
+// Widget con estado que representa la pantalla de número de repeticiones.
+class NumeroRepeticiones extends StatefulWidget {
+  const NumeroRepeticiones({super.key});
+
   @override
-  // ignore: library_private_types_in_public_api
-  _EjecucionesScreenState createState() => _EjecucionesScreenState();
+  _NumeroRepeticionesState createState() => _NumeroRepeticionesState();
 }
 
-// Define el estado (State) para el widget numero_repe
-class _EjecucionesScreenState extends State<numero_repe> {
-  // Variable para controlar el estado de reproducción (play/pause)
-  bool isPlaying = false;
-  // Variables para almacenar los valores numéricos
-  int numeroSerie = 4;
+// Estado asociado al widget NumeroRepeticiones.
+class _NumeroRepeticionesState extends State<NumeroRepeticiones> {
+  // Variable para controlar el estado de reproducción (reproduciendo/pausado).
+  bool reproduciendo = false;
+  // Variables para almacenar los valores numéricos de series, repeticiones, tiempo y carga.
+  int numeroSeries = 4;
   int numeroRepeticiones = 12;
   int tiempoRepeticion = 60;
   double carga = 0.0;
 
   @override
   Widget build(BuildContext context) {
-    // Devuelve un Scaffold (estructura básica de una pantalla)
+    // Construye la interfaz de la pantalla.
     return Scaffold(
-      backgroundColor: Colors.black, // Establece el color de fondo como negro
+      backgroundColor: Colors.black, // Establece el fondo a negro.
       body: SafeArea(
-        // Asegura que el contenido no se superponga a la barra de estado del dispositivo
+        // Asegura que el contenido esté dentro de los límites seguros de la pantalla.
         child: Column(
-          // Usa una columna para organizar los widgets verticalmente
-          crossAxisAlignment:
-              CrossAxisAlignment.stretch, // Estira los widgets horizontalmente
+          // Organiza los widgets de forma vertical.
+          crossAxisAlignment: CrossAxisAlignment.stretch, // Extiende los widgets horizontalmente.
           children: [
-            // Barra de título verde con imagen
+            // Barra de título con fondo verde y texto "Plancha".
             Container(
-              color: Colors.green, // Color de fondo verde
-              padding: const EdgeInsets.all(16.0), // Padding interno
+              color: Colors.green, // Fondo verde.
+              padding: const EdgeInsets.all(16.0), // Espacio interno.
               child: const Row(
-                // Usa una fila para organizar los elementos horizontalmente
+                // Organiza los elementos horizontalmente.
                 children: [
-                  /*Image.asset(
-                    'assets/plancha_ejercicio.png', // Ruta de la imagen (debe estar en assets y declarada en pubspec.yaml)
-                    width: 80, // Ancho de la imagen
-                    height: 80, // Alto de la imagen
-                  ),*/
-                  SizedBox(
-                      width:
-                          16), // Espacio horizontal entre la imagen y el texto
-                  Text(
-                    'Plancha', // Título del ejercicio
+                  // Aquí se puede añadir una imagen si es necesario.
+                   SizedBox(width: 16), // Espacio horizontal.
+                   Text(
+                    'Plancha', // Título del ejercicio.
                     style: TextStyle(
-                      color: Colors.white, // Color del texto blanco
-                      fontSize: 20, // Tamaño de la fuente 20
-                      fontWeight: FontWeight.bold, // Texto en negrita
+                      color: Colors.white, // Texto de color blanco.
+                      fontSize: 20, // Tamaño de fuente.
+                      fontWeight: FontWeight.bold, // Texto en negrita.
                     ),
                   ),
                 ],
               ),
             ),
-
-            const SizedBox(height: 16), // Espacio vertical
-
-            // Contenedores para la información del ejercicio
+            const SizedBox(height: 16), // Espacio vertical.
+            // Contenedor para la información del ejercicio.
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0), // Padding horizontal
+              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Espacio horizontal.
               child: Column(
-                // Columna para organizar los contenedores verticalmente
+                // Organiza los elementos verticalmente.
                 children: [
-                  _buildInfoRow('Rep/Carga', 'Tipo de Serie',
-                      'Tipo de Serie'), // Fila de información
-                  const SizedBox(height: 16), // Espacio vertical
-                  _buildNumberControl('Número de serie', numeroSerie, (value) {
-                    // Control numérico para número de serie
+                  _crearFilaInfo('Rep/Carga', 'Tipo de Serie', 'Tipo de Serie'), // Fila de información.
+                  const SizedBox(height: 16), // Espacio vertical.
+                  _crearControlNumerico('Número de series', numeroSeries, (valor) {
+                    // Control para ajustar el número de series.
                     setState(() {
-                      // Actualiza el estado del widget
-                      numeroSerie = value; // Asigna el nuevo valor
+                      numeroSeries = valor; // Actualiza el valor.
                     });
                   }),
-                  const SizedBox(height: 16), // Espacio vertical
-                  _buildNumberControl(
-                      'Número de repeticiones', numeroRepeticiones, (value) {
-                    // Control numérico para repeticiones
+                  const SizedBox(height: 16),
+                  _crearControlNumerico('Número de repeticiones', numeroRepeticiones, (valor) {
+                    // Control para ajustar el número de repeticiones.
                     setState(() {
-                      numeroRepeticiones = value;
+                      numeroRepeticiones = valor;
                     });
                   }),
-                  const SizedBox(height: 16), // Espacio vertical
-                  _buildNumberControl(
-                      'Tiempo de repetición (segundos)', tiempoRepeticion,
-                      (value) {
-                    // Control numérico para tiempo
+                  const SizedBox(height: 16),
+                  _crearControlNumerico('Tiempo de repetición (segundos)', tiempoRepeticion, (valor) {
+                    // Control para ajustar el tiempo de repetición.
                     setState(() {
-                      tiempoRepeticion = value;
+                      tiempoRepeticion = valor;
                     });
                   }),
-                  const SizedBox(height: 16), // Espacio vertical
-                  _buildNumberControl('Carga', carga, (value) {
-                    // Control numérico para carga (permite decimales)
+                  const SizedBox(height: 16),
+                  _crearControlNumerico('Carga', carga, (valor) {
+                    // Control para ajustar la carga (permite decimales).
                     setState(() {
-                      carga = value;
+                      carga = valor;
                     });
-                  }, isDouble: true), // Para carga, permite decimales
-                  const SizedBox(height: 16), // Espacio vertical
+                  }, esDecimal: true), // Indica que el valor es decimal.
+                  const SizedBox(height: 16),
                   const Row(
-                    // Fila para el asterisco y el texto "carga"
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Distribuye los elementos en el espacio disponible
+                    // Fila vacía para posible información adicional.
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
                 ],
               ),
             ),
-
-            const Spacer(), // Ocupa el espacio restante para empujar la barra de control hacia abajo
-
-            // Barra de control de reproducción
+            const Spacer(), // Ocupa el espacio disponible para empujar elementos hacia abajo.
+            // Barra de control de reproducción.
             Container(
-              color: const Color.fromARGB(
-                  255, 43, 159, 17), // Color de fondo verde oscuro
-              padding: const EdgeInsets.all(8.0), // Padding interno
+              color: const Color.fromARGB(255, 43, 159, 17), // Fondo verde oscuro.
+              padding: const EdgeInsets.all(8.0), // Espacio interno.
               child: Row(
-                // Fila para organizar los elementos horizontalmente
-                mainAxisAlignment: MainAxisAlignment
-                    .spaceAround, // Distribuye los elementos en el espacio disponible
+                // Organiza los botones horizontalmente.
+                mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribuye los botones equitativamente.
                 children: [
                   IconButton(
-                    // Botón para reproducir
+                    // Botón de reproducir.
                     onPressed: () {
                       setState(() {
-                        isPlaying = true; // Cambia el estado a "reproduciendo"
-                        // Aquí va la lógica para iniciar la reproducción
+                        reproduciendo = true; // Cambia el estado a reproduciendo.
+                        // Aquí va la lógica para iniciar la reproducción.
                       });
                     },
-                    icon: const Icon(Icons.play_arrow,
-                        color: Colors.white, size: 30), // Icono de "play"
+                    icon: const Icon(Icons.play_arrow, color: Colors.white, size: 30), // Icono de reproducir.
                   ),
                   IconButton(
-                    // Botón para pausar
+                    // Botón de pausar.
                     onPressed: () {
                       setState(() {
-                        isPlaying = false; // Cambia el estado a "pausado"
-                        // Aquí va la lógica para pausar la reproducción
+                        reproduciendo = false; // Cambia el estado a pausado.
+                        // Aquí va la lógica para pausar la reproducción.
                       });
                     },
-                    icon: const Icon(Icons.pause,
-                        color: Colors.white, size: 30), // Icono de "pause"
+                    icon: const Icon(Icons.pause, color: Colors.white, size: 30), // Icono de pausar.
                   ),
                   IconButton(
-                    // Botón para detener
+                    // Botón de detener.
                     onPressed: () {
                       setState(() {
-                        isPlaying = false; // Cambia el estado a "detenido"
-                        // Aquí va la lógica para detener la reproducción
+                        reproduciendo = false; // Cambia el estado a detenido.
+                        // Aquí va la lógica para detener la reproducción.
                       });
                     },
-                    icon: const Icon(Icons.stop,
-                        color: Colors.white, size: 30), // Icono de "stop"
+                    icon: const Icon(Icons.stop, color: Colors.white, size: 30), // Icono de detener.
                   ),
                 ],
               ),
@@ -164,64 +143,55 @@ class _EjecucionesScreenState extends State<numero_repe> {
     );
   }
 
-  // Widget para construir filas de información (sin controles numéricos)
-  Widget _buildInfoRow(String label1, String text1, String text2) {
+  // Método para crear una fila de información sin controles numéricos.
+  Widget _crearFilaInfo(String etiqueta1, String texto1, String texto2) {
     return Container(
-      padding: const EdgeInsets.all(16.0), // Padding interno
+      padding: const EdgeInsets.all(16.0), // Espacio interno.
       decoration: BoxDecoration(
-        color: Colors.grey[900], // Color de fondo gris oscuro
-        borderRadius: BorderRadius.circular(10.0), // Bordes redondeados
+        color: Colors.grey[900], // Fondo gris oscuro.
+        borderRadius: BorderRadius.circular(10.0), // Bordes redondeados.
       ),
       child: Row(
-        // Fila para organizar los elementos horizontalmente
-        mainAxisAlignment: MainAxisAlignment
-            .spaceBetween, // Distribuye los elementos en el espacio disponible
+        // Organiza los elementos horizontalmente.
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Distribuye los elementos equitativamente.
         children: [
-          Text(label1, style: const TextStyle(color: Colors.white)), // Texto 1
-          Text(text1, style: const TextStyle(color: Colors.white)), // Texto 2
-          Text(text2, style: const TextStyle(color: Colors.white)), // Texto 3
+          Text(etiqueta1, style: const TextStyle(color: Colors.white)), // Primer texto.
+          Text(texto1, style: const TextStyle(color: Colors.white)),     // Segundo texto.
+          Text(texto2, style: const TextStyle(color: Colors.white)),     // Tercer texto.
         ],
       ),
     );
   }
 
-  // Widget para construir controles numéricos (para series, repeticiones, etc.)
-  Widget _buildNumberControl(
-      String label, dynamic value, Function(dynamic) onChanged,
-      {bool isDouble = false}) {
+  // Método para crear un control numérico con botones de incrementar y decrementar.
+  Widget _crearControlNumerico(String etiqueta, dynamic valor, Function(dynamic) onChanged, {bool esDecimal = false}) {
     return Container(
-      padding: const EdgeInsets.all(16.0), // Padding interno
+      padding: const EdgeInsets.all(16.0), // Espacio interno.
       decoration: BoxDecoration(
-        color: Colors.grey[900], // Color de fondo gris oscuro
-        borderRadius: BorderRadius.circular(10.0), // Bordes redondeados
+        color: Colors.grey[900], // Fondo gris oscuro.
+        borderRadius: BorderRadius.circular(10.0), // Bordes redondeados.
       ),
       child: Row(
-        // Fila para organizar los elementos horizontalmente
-        mainAxisAlignment: MainAxisAlignment
-            .spaceBetween, // Distribuye los elementos en el espacio disponible
+        // Organiza los elementos horizontalmente.
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Distribuye los elementos equitativamente.
         children: [
-          Text(label, style: const TextStyle(color: Colors.white)), // Etiqueta
+          Text(etiqueta, style: const TextStyle(color: Colors.white)), // Etiqueta del control.
           Row(
-            // Fila para los botones y el valor
+            // Fila interna para los botones y el valor.
             children: [
               IconButton(
-                // Botón para decrementar
+                // Botón para disminuir el valor.
                 icon: const Icon(Icons.remove, color: Colors.white),
                 onPressed: () {
-                  onChanged(isDouble
-                      ? value - 0.5
-                      : value - 1); // Decrementa el valor (0.5 si es double)
+                  onChanged(esDecimal ? valor - 0.5 : valor - 1); // Decrementa el valor según sea decimal o entero.
                 },
               ),
-              Text(value.toString(),
-                  style: const TextStyle(color: Colors.white)), // Valor actual
+              Text(valor.toString(), style: const TextStyle(color: Colors.white)), // Muestra el valor actual.
               IconButton(
-                // Botón para incrementar
+                // Botón para aumentar el valor.
                 icon: const Icon(Icons.add, color: Colors.white),
                 onPressed: () {
-                  onChanged(isDouble
-                      ? value + 0.5
-                      : value + 1); // Incrementa el valor (0.5 si es double)
+                  onChanged(esDecimal ? valor + 0.5 : valor + 1); // Incrementa el valor.
                 },
               ),
             ],

@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
 
-// Widget que representa la pantalla de ejecuciones de un ejercicio.
-class EjecucionesScreen extends StatelessWidget {
-  const EjecucionesScreen({super.key});
+// Pantalla que muestra las ejecuciones de un ejercicio.
+class PantallaEjecuciones extends StatelessWidget {
+  const PantallaEjecuciones({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Color de fondo negro para la pantalla.
+      backgroundColor: Colors.black, // Fondo negro para la pantalla.
       body: SafeArea(
-        // SafeArea para evitar que el contenido se superponga a la barra de estado u otros elementos del sistema.
+        // Asegura que el contenido no se superponga con áreas como la barra de estado.
         child: Column(
-          // Columna principal que organiza los elementos verticalmente.
-          crossAxisAlignment: CrossAxisAlignment
-              .center, // Alinea los elementos horizontalmente al centro.
+          // Organiza los widgets de forma vertical.
+          crossAxisAlignment: CrossAxisAlignment.center, // Centra los elementos horizontalmente.
           children: [
-            // Contenedor para la cabecera con imagen y título.
+            // Cabecera con imagen y título.
             Container(
-              color: Colors.green, // Color de fondo verde para la cabecera.
-              padding: const EdgeInsets.all(
-                  16.0), // Padding interno para la cabecera.
+              color: Colors.green, // Fondo verde para la cabecera.
+              padding: const EdgeInsets.all(16.0), // Espacio interno de 16 píxeles.
               child: const Row(
-                // Fila para organizar la imagen y el título horizontalmente.
+                // Organiza los widgets de forma horizontal.
                 children: [
-                  /* Image.network(
-                    'https://via.placeholder.com/150', // Replace with your image URL
+                  // Imagen (comentada porque la URL es un marcador de posición y puede causar errores).
+                  /*
+                  Image.network(
+                    'https://via.placeholder.com/150', // Reemplaza con la URL de tu imagen.
                     width: 80,
                     height: 80,
-                  ),*/ // arreflar error de la imagen - Comentado porque la URL es un placeholder y puede causar errores.
-                  SizedBox(
-                      width:
-                          16), // Espacio horizontal entre la imagen y el título.
+                  ),
+                  */
+                  SizedBox(width: 16), // Espacio horizontal entre la imagen y el texto.
                   Text(
-                    'crunch básico', // Título del ejercicio.
+                    'Crunch básico', // Título del ejercicio.
                     style: TextStyle(
-                      color: Colors.white, // Color de texto blanco.
+                      color: Colors.white, // Texto en color blanco.
                       fontSize: 20, // Tamaño de fuente 20.
                       fontWeight: FontWeight.bold, // Texto en negrita.
                     ),
@@ -42,48 +41,40 @@ class EjecucionesScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-                height:
-                    16), // Espacio vertical entre la cabecera y las instrucciones.
+            const SizedBox(height: 16), // Espacio vertical entre la cabecera y las instrucciones.
             // Sección de instrucciones.
             Expanded(
-              // El widget Expanded permite que este contenedor ocupe el espacio disponible restante.
+              // Expande este widget para ocupar el espacio disponible.
               child: Container(
-                padding: const EdgeInsets.all(
-                    16.0), // Padding interno para las instrucciones.
+                padding: const EdgeInsets.all(16.0), // Espacio interno de 16 píxeles.
                 decoration: BoxDecoration(
-                  color: Colors.grey[
-                      900], // Color de fondo gris oscuro para las instrucciones.
+                  color: Colors.grey[900], // Fondo gris oscuro para las instrucciones.
                   borderRadius: const BorderRadius.vertical(
-                    // Bordes redondeados solo en la parte superior.
-                    top: Radius.circular(20.0),
+                    top: Radius.circular(20.0), // Bordes redondeados en la parte superior.
                   ),
                 ),
                 child: const Column(
-                  // Columna para organizar el texto de las instrucciones verticalmente.
-                  crossAxisAlignment: CrossAxisAlignment
-                      .start, // Alinea el texto a la izquierda.
+                  // Organiza los widgets de forma vertical.
+                  crossAxisAlignment: CrossAxisAlignment.start, // Alinea el texto a la izquierda.
                   children: [
                     Text(
-                      'Posición Inicial:', // Título de la sección de posición inicial.
+                      'Posición Inicial:', // Encabezado de la sección.
                       style: TextStyle(
-                        color: Colors.white, // Color de texto blanco.
+                        color: Colors.white, // Texto en color blanco.
                         fontSize: 18, // Tamaño de fuente 18.
                         fontWeight: FontWeight.bold, // Texto en negrita.
                       ),
                     ),
-                    SizedBox(
-                        height:
-                            8), // Espacio vertical entre el título y el texto de la posición inicial.
+                    SizedBox(height: 8), // Espacio vertical entre el título y el contenido.
                     Text(
                       'Acuéstate sobre una superficie plana, como una colchoneta.\n\n'
                       'Flexiona las rodillas y coloca los pies planos en el suelo, separados al ancho de las caderas.\n\n'
                       'Coloca las manos detrás de la cabeza o cruzadas sobre el pecho. '
-                      'Si las colocas detrás de la cabeza, asegúrate de no usar las manos para jalar el cuello.', // Instrucciones de la posición inicial.
+                      'Si las colocas detrás de la cabeza, asegúrate de no usar las manos para jalar el cuello.', // Instrucciones detalladas.
                       style: TextStyle(
-                        color: Colors.white, // Color de texto blanco.
+                        color: Colors.white, // Texto en color blanco.
                         fontSize: 16, // Tamaño de fuente 16.
-                        height: 1.5, // Altura de línea 1.5.
+                        height: 1.5, // Altura de línea para mejorar la legibilidad.
                       ),
                     ),
                   ],
@@ -92,22 +83,20 @@ class EjecucionesScreen extends StatelessWidget {
             ),
             // Botón de reproducción.
             Container(
-              padding:
-                  const EdgeInsets.all(16.0), // Padding interno para el botón.
+              padding: const EdgeInsets.all(16.0), // Espacio interno alrededor del botón.
               child: ElevatedButton(
-                onPressed:
-                    () {}, // Acción al presionar el botón (actualmente vacía).
+                onPressed: () {
+                  // Acción al presionar el botón (actualmente vacío).
+                },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.grey[700], // Color de fondo gris para el botón.
-                  shape: const CircleBorder(), // Forma circular para el botón.
-                  padding: const EdgeInsets.all(
-                      20), // Padding interno para el botón.
+                  backgroundColor: Colors.grey[700], // Fondo gris para el botón.
+                  shape: const CircleBorder(), // Forma circular del botón.
+                  padding: const EdgeInsets.all(20), // Espacio interno del botón.
                 ),
                 child: const Icon(
-                  Icons.play_arrow, // Icono de reproducción.
-                  color: Colors.white, // Color de icono blanco.
-                  size: 40, // Tamaño de icono 40.
+                  Icons.play_arrow, // Icono de "play" para indicar reproducción.
+                  color: Colors.white, // Icono en color blanco.
+                  size: 40, // Tamaño del icono.
                 ),
               ),
             ),

@@ -27,14 +27,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
-      //home: NivelScreen(),
-      //home: Temporizador(),
-      //home: EjecucionesScreen(),
-      //home: EjerciciosPrincipianteScreen(),
-      //home: numero_repe(),
-      //home: FelicitacionesScreen(),
+      //home: PantallaFelicitaciones(),
       //home: DesafiosScreen(),
+      //home: PantallaEjecuciones(),
+      //home: PantallaEjerciciosPrincipiante(),
+      //home: PantallaNivel(),
+      
+      home: NumeroRepeticiones(),
+      //home: Temporizador(),
     );
   }
 }

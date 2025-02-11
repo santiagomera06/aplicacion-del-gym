@@ -1,20 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 
-// Widget principal de la aplicación
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false, // Oculta la etiqueta de depuración
-      home:
-          DesafiosScreen(), // Establece la pantalla de desafíos como la principal
-    );
-  }
-}
-
 // Pantalla principal de desafíos
 class DesafiosScreen extends StatelessWidget {
   const DesafiosScreen({super.key});
